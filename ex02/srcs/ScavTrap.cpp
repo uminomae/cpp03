@@ -1,7 +1,6 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(){
-// :Name("Clap"),HitPoints(10),EnergyPoints(10),AttackDamaged(0),Max_HP(10){　←ほんとはここにこんなふうに入れたかった。
 	myPutStr("", "Derived class Scav : Default constructor called", PINK198);
 	HitPoints = 100;
 	EnergyPoints = 50;

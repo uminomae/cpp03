@@ -1,7 +1,6 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap(){
-// :Name("Clap"),HitPoints(10),EnergyPoints(10),AttackDamaged(0),Max_HP(10){　←ほんとはここにこんなふうに入れたかった。
 	myPutStr("", "Derived class Flag : Default constructor called", PINK198);
 	Name = "Frag";
 	HitPoints = 100;
