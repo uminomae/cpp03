@@ -84,3 +84,37 @@ void myPutStr(std::string s1, std::string s2, std::string color){
 	std::cout << color << s1 << s2 << RESET_COLOR << std::endl;
 }
 
+// First, you have to implement a class! How original!
+// It will be called ClapTrap and will have the following private attributes initialized to the values specified in brackets:
+// まず、クラスを実装する必要があります。 なんとオリジナル！
+// これは ClapTrap と呼ばれ、角かっこで指定された値に初期化された次のプライベート属性を持ちます。
+
+// • Name, which is passed as parameter to a constructor
+// • Hit points (10), represent the health of the ClapTrap
+// • Energy points (10)
+// • Attack damage (0)
+
+// Add the following public member functions so the ClapTrap looks more realistic:
+// 次のパブリック メンバー関数を追加して、ClapTrap がより現実的に見えるようにします。
+
+// • void attack(const std::string& target);
+// • void takeDamage(unsigned int amount);
+// • void beRepaired(unsigned int amount);
+
+// When ClapTrack attacks, it causes its target to lose <attack damage> hit points.
+// When ClapTrap repairs itself, it gets <amount> hit points back. Attacking and repairing cost 1 energy point each. Of course, ClapTrap can’t do anything if it has no hit points or energy points left.
+// ClapTrack が攻撃すると、ターゲットは <attack damage> のヒット ポイントを失います。
+// ClapTrap が自己修復すると、ヒット ポイントが <amount> 回復します。 攻撃と修復には、それぞれ 1 エネルギー ポイントが必要です。 もちろん、ヒット ポイントやエネルギー ポイントが残っていない場合、ClapTrap は何もできません。
+
+
+// In all of these member functions, you have to print a message to describe what happens. For example, the attack() function may display something like (of course, without the angle brackets):
+// ClapTrap <name> attacks <target>, causing <damage> points of damage!
+
+// これらすべてのメンバー関数で、何が起こるかを説明するメッセージを出力する必要があります。 たとえば、attack() 関数は次のように表示される場合があります (もちろん、山括弧なしで):
+// ClapTrap <name> が <target> を攻撃し、<damage> ポイントのダメージを与えます!
+
+// The constructors and destructor must also display a message, so your peer-evaluators can easily see they have been called.
+// コンストラクタとデストラクタもメッセージを表示する必要があるため、ピア評価者はそれらが呼び出されたことを簡単に確認できます。
+
+// Implement and turn in your own tests to ensure your code works as expected.
+// 独自のテストを実装して有効にし、コードが期待どおりに機能することを確認します。
