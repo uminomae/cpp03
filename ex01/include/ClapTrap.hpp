@@ -40,5 +40,10 @@ const std::string PINK201 = "\033[38;5;201m";
 const std::string RED = "\033[38;5;52m";
 const std::string RESET_COLOR = "\033[m";
 
+const std::string PINK136 = "\033[38;5;136m";
+const std::string PINK180 = "\033[38;5;180m";
+const std::string PINK190 = "\033[38;5;190m";
+const std::string PINK202 = "\033[38;5;208m";
+
 #endif
 
