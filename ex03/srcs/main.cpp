@@ -1,14 +1,15 @@
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
 
-#define MY_TEST1_CLAP
-#define MY_TEST2_SCAV
-#define MY_TEST3_FRAG
+#include "DiamondTrap.hpp"
+
+// #define MY_TEST1_CLAP
+// #define MY_TEST2_SCAV
+// #define MY_TEST3_FRAG
+#define MY_TEST4_DIAMOND
 
 void myTest1Clap();
 void myTest2Scav();
 void myTest3Frag();
+void myTest4Diamond();
 
 
 int main(){
@@ -20,6 +21,9 @@ int main(){
 #endif
 #ifdef MY_TEST3_FRAG
 	myTest3Frag();
+#endif
+#ifdef MY_TEST4_DIAMOND
+	myTest4Diamond();
 #endif
 	return 0;
 }
@@ -117,7 +121,7 @@ void myTest1Clap(){
 
 	myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
 	d.attack("YadaYada-");
-	d.DebugEP(PINK183);
+	d.DebugHp(PINK183);
 
 	myPutStr("", "=== end of scope", PINK170);
 }
@@ -199,10 +203,40 @@ void myTest2Scav(){
 			Sd.beRepaired(2);
 			Sd.DebugEP(PINK180);
 		}
+		
+		myPutStr("=== ", "Fd.attack(\"YadaYada-\")", PINK170);
+		Sd.attack("YadaYada-");
+		Sd.DebugEP(PINK183);
+
+		myPutStr("=== ", "Sd.guardGate()", PINK136);
+		Sd.guardGate();
 	}
 #endif
 
-		myPutStr("", "=== end of scope", PINK136);
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+
+	while (Sd.getHitPoints() > 0){
+		myPutStr("=== ", "Sd.takeDamage(48)", PINK170);
+		Sd.takeDamage(48);
+		Sd.DebugHp(PINK183);
+	}
+
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "No HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+	
+	myPutStr("=== no hit points ", "Sd.takeDamage(1)", PINK170);
+	Sd.takeDamage(1);
+	Sd.DebugHp(PINK183);
+
+	myPutStr("=== ", "Sd.attack(\"YadaYada-\")", PINK170);
+	Sd.attack("YadaYada-");
+	Sd.DebugEP(PINK183);
+
+	myPutStr("", "=== end of scope", PINK136);
 	}
 }
 
@@ -268,7 +302,6 @@ void myTest3Frag(){
 		Fd.highFivesGuys();
 		
 
-
 // #define DEB_LOOP100
 #ifdef DEB_LOOP100
 	{
@@ -286,12 +319,16 @@ void myTest3Frag(){
 			Fd.beRepaired(2);
 			Fd.DebugEP(PINK180);
 		}
+
+		myPutStr("=== ", "Fd.attack(\"YadaYada-\")", PINK170);
+		Fd.attack("YadaYada-");
+		Fd.DebugEP(PINK183);
 	}
 #endif
 
 
 	myPutStr("=========", "===========", PINK198);
-	myPutStr("MY_TEST3_FRAG  ", "HitPoints ", PINK198);
+	myPutStr("TEST  ", "HitPoints ", PINK198);
 	myPutStr("=========", "===========", PINK198);
 
 	while (Fd.getHitPoints() > 0){
@@ -302,7 +339,7 @@ void myTest3Frag(){
 
 
 	myPutStr("=========", "===========", PINK198);
-	myPutStr("MY_TEST3_FRAG  ", "No HitPoints ", PINK198);
+	myPutStr("TEST  ", "No HitPoints ", PINK198);
 	myPutStr("=========", "===========", PINK198);
 	
 	myPutStr("=== no hit points ", "Fd.takeDamage(1)", PINK170);
@@ -319,29 +356,161 @@ void myTest3Frag(){
 
 
 
-// Making ClapTraps is probably starting to get on your nerves.
-// ClapTraps を作成すると、おそらく神経質になり始めているでしょう。
 
-// Now, implement a FragTrap class that inherits from ClapTrap. It is very similar to ScavTrap. However, its construction and destruction messages must be different. Proper construction/destruction chaining must be shown in your tests. When a FragTrap is created, the program starts by building a ClapTrap. Destruction is in reverse order.
-// ここで、ClapTrap を継承する FragTrap クラスを実装します。 ScavTrap と非常によく似ています。 ただし、その構築メッセージと破棄メッセージは異なる必要があります。 テストでは、適切な構築/破壊連鎖を示す必要があります。 FragTrap が作成されると、プログラムは ClapTrap の作成から開始します。 破壊は逆順です。
+void myTest4Diamond(){
+	{
 
-// Same things for the attributes, but with different values this time:
+		myPutStr("=========", "===========", PINK198);
+		myPutStr("MY_TEST4_Diamond ", " Frag           ", PINK198);
+		myPutStr("=========", "===========", PINK198);
+
+		myPutStr("=========", "===========", PINK201);
+		myPutStr("MY_TEST4_Diamond ", " constructor called ", PINK201);
+		myPutStr("=========", "===========", PINK201);
+
+		myPutStr("=== DiamondTrap Da;", "", PINK136);
+		DiamondTrap Da;
+		myPutStr("=== DiamondTrap Db(Da);", "", PINK136);
+		DiamondTrap Db(Da);
+		myPutStr("=== DiamondTrap Dc;", "", PINK136);
+		DiamondTrap Dc;
+		myPutStr("=== Dc = Db;", "", PINK136);
+		Dc = Db;
+		myPutStr("=== Db = Db;", "", PINK136);
+		Db = Dc;
+		myPutStr("=== DiamondTrap Dd(\"CureWhite\");", "", PINK136);
+		DiamondTrap Dd("CureWhite");
+
+
+		myPutStr("=========", "===========", PINK201);
+		myPutStr("MY_TEST4_Diamond  ", " member variable", PINK201);
+		myPutStr("=========", "===========", PINK201);
+
+		myPutStr("=== Da", "", PINK183);
+		Da.DebugHp(PINK180);
+		myPutStr("=== Db", "", PINK183);
+		Db.DebugHp(PINK180);
+		myPutStr("=== Dc", "", PINK183);
+		Dc.DebugHp(PINK180);
+		myPutStr("=== Dd", "", PINK183);
+		Dd.DebugHp(PINK180);
+
+
+		myPutStr("=========", "===========", PINK201);
+		myPutStr("MY_TEST4_Diamond  ", " member functions ", PINK201);
+		myPutStr("=========", "===========", PINK201);
+
+		myPutStr("=== ", "Dd.attack(\"MoyaMoya-\")", PINK183);
+		Dd.ScavTrap::attack("MoyaMoya-");
+		Dd.DebugHp(PINK180);
+		
+		myPutStr("=== ", "Dd.takeDamage(3)", PINK183);
+		Dd.takeDamage(3);
+		Dd.DebugHp(PINK180);
+		
+		myPutStr("=== ", "Dd.beRepaired(4)", PINK183);
+		Dd.beRepaired(4);
+		Dd.DebugHp(PINK180);
+
+		myPutStr("=========", "===========", PINK201);
+		myPutStr("MY_TEST4_Diamond  ", " mode", PINK201);
+		myPutStr("=========", "===========", PINK201);
+		myPutStr("=== ", "Dd.whoAmI()", PINK183);
+		Dd.whoAmI();
+		myPutStr("=== ", "Dd.highFivesGuys()", PINK183);
+		Dd.highFivesGuys();
+		myPutStr("=== ", "Dd.guardGate()", PINK136);
+		Dd.guardGate();
+
+		
+
+
+// #define DEB_LOOP100
+#ifdef DEB_LOOP100
+	{
+		DiamondTrap Dd("CureWhite");
+		myPutStr("=========", "===========", PINK201);
+		myPutStr("MY_TEST4_Diamond  ", "EnergyPoints ", PINK201);
+		myPutStr("=========", "===========", PINK201);
+		
+		while (Dd.getEnergyPoints() > 0){
+			myPutStr("=== ", "Dd.ScavTrap::attack(\"MoyaMoya-\")", PINK183);
+			Dd.ScavTrap::attack("MoyaMoya-");
+			Dd.DebugEP(PINK180);
+			
+			myPutStr("=== ", "Dd.beRepaired(2)", PINK183);
+			Dd.beRepaired(2);
+			Dd.DebugEP(PINK180);
+		}
+	}
+#endif
+
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("MY_TEST4_Diamond  ", "HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+
+	while (Dd.getHitPoints() > 0){
+		myPutStr("=== ", "Dd.takeDamage(48)", PINK170);
+		Dd.takeDamage(48);
+		Dd.DebugHp(PINK183);
+	}
+
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("MY_TEST4_Diamond  ", "No HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+	
+	myPutStr("=== no hit points ", "Dd.takeDamage(1)", PINK170);
+	Dd.takeDamage(1);
+	Dd.DebugHp(PINK183);
+
+	myPutStr("=== ", "Dd.ScavTrap::attack(\"YadaYada-\")", PINK170);
+	Dd.ScavTrap::attack("YadaYada-");
+	Dd.DebugEP(PINK183);
+
+	myPutStr("", "=== end of scope", PINK183);
+	}
+}
+
+// ex03
+// In this exercise, you will create a monster: a ClapTrap that’s half FragTrap, half ScavTrap. It will be named DiamondTrap, and it will inherit from both the FragTrap AND the ScavTrap. This is so risky!
+// The DiamondTrap class will have a name private attribute. Give to this attribute exactly the same variable’s name (not talking about the robot’s name here) than the one in the ClapTrap base class.
+// この演習では、半分が FragTrap で半分が ScavTrap である ClapTrap というモンスターを作成します。 これは DiamondTrap という名前になり、FragTrap と ScavTrap の両方から継承されます。 これはとても危険です！
+// DiamondTrap クラスには name プライベート属性があります。 この属性には、ClapTrap 基本クラスのものとまったく同じ変数名 (ここではロボットの名前については言及していません) を指定します。
+
+// To be more clear, here are two examples.
+// If ClapTrap’s variable is name, give the name name to the one of the DiamondTrap.
+// If ClapTrap’s variable is _name, give the name _name to the one of the DiamondTrap.
+// より明確にするために、ここに 2 つの例を示します。
+// ClapTrap の変数が name の場合、DiamondTrap の 1 つに name という名前を付けます。
+// ClapTrap の変数が _name の場合、DiamondTrap の 1 つに _name という名前を付けます。
+
+// Its attributes and member functions will be picked from either one of its parent classes:
+// その属性とメンバー関数は、その親クラスのいずれかから選択されます。
+
 // • Name, which is passed as parameter to a constructor
-// • Hit points (100), represent the health of the ClapTrap
-// • Energy points (100)
-// • Attack damage (30)
-// FragTrap has a special capacity too:
-// void highFivesGuys(void);
-
-// 属性も同じですが、今回は値が異なります。
+// • ClapTrap::name (parameter of the constructor + "_clap_name" suffix)
+// • Hit points (FragTrap)
+// • Energy points (ScavTrap)
+// • Attack damage (FragTrap)
+// • attack() (Scavtrap)
 // • コンストラクターにパラメーターとして渡される名前
-// • ヒット ポイント (100)、ClapTrap のヘルスを表します
-// •エネルギーポイント（100）
-// • 攻撃ダメージ (30)
-// FragTrap にも特別な機能があります。
-// void highFivesGuys(void);
+// • ClapTrap::name (コンストラクターのパラメーター + "_clap_name" サフィックス)
+// • ヒット ポイント (FragTrap)
+// •エネルギーポイント（ScavTrap）
+// • 攻撃ダメージ (FragTrap)
+// • attack() (スキャブトラップ)
 
-// This member function displays a positive high fives request on the standard output.
+// In addition to the special functions of both its parent classes, DiamondTrap will have
+// its own special capacity:
+// void whoAmI();
+// This member function will display both its name and its ClapTrap name.
+// Of course, the ClapTrap subobject of the DiamondTrap will be created once, and only once. Yes, there’s a trick.
 // Again, add more tests to your program.
-// このメンバー関数は、標準出力にポジティブ ハイタッチ リクエストを表示します。
+// 両方の親クラスの特別な機能に加えて、DiamondTrap には次の機能があります。
+// 独自の特別な能力:
+// void whoAmI();
+// このメンバー関数は、その名前と ClapTrap 名の両方を表示します。
+// もちろん、DiamondTrap の ClapTrap サブオブジェクトは一度だけ作成されます。 はい、コツがあります。
 // 繰り返しますが、プログラムにさらにテストを追加してください。

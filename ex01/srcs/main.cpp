@@ -201,7 +201,7 @@ void myTest2Scav(){
 
 
 	myPutStr("=========", "===========", PINK198);
-	myPutStr("TEST  ", "HitPoints ", PINK198);
+	myPutStr("MY_TEST2_SCAV  ", "HitPoints ", PINK198);
 	myPutStr("=========", "===========", PINK198);
 
 	while (Sd.getHitPoints() > 0){
@@ -212,7 +212,7 @@ void myTest2Scav(){
 
 
 	myPutStr("=========", "===========", PINK198);
-	myPutStr("TEST  ", "No HitPoints ", PINK198);
+	myPutStr("MY_TEST2_SCAV  ", "No HitPoints ", PINK198);
 	myPutStr("=========", "===========", PINK198);
 	
 	myPutStr("=== no hit points ", "Sd.takeDamage(1)", PINK170);
