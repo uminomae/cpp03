@@ -16,15 +16,17 @@ FragTrap::FragTrap(const FragTrap& obj){
 
 FragTrap& FragTrap::operator =(const FragTrap& rhs){
 	myPutStr("", "Derived class Flag : Copy assignment operator called", PINK198);
-	Name = rhs.Name;
-	HitPoints = rhs.HitPoints;
-	EnergyPoints = rhs.EnergyPoints;
-	AttackDamaged = rhs.AttackDamaged;
+	if (this != &rhs){
+		Name = rhs.Name;
+		HitPoints = rhs.HitPoints;
+		EnergyPoints = rhs.EnergyPoints;
+		AttackDamaged = rhs.AttackDamaged;
+	}
 	return *this;
 }
 
 FragTrap::~FragTrap(){
-	myPutStr("", "Derived class Flag : Destructor called", PINK198);
+	myPutStr(this->Name, " : Destructor called", PINK198);
 }
 
 FragTrap::FragTrap(std::string s)
@@ -41,7 +43,10 @@ FragTrap::FragTrap(std::string s)
 
 void FragTrap::attack(const std::string& target){
 	std::string s = typeid(*this).name();
-	if (EnergyPoints == 0){
+	if (HitPoints == 0){
+		myPutStr(Name, "  no hit points. looks like a corpse.", PINK198);
+		return ;
+	}else if (EnergyPoints == 0){
 		std::cout 
 		<< s.substr(1, s.size()-1)
 		<< " "
@@ -63,51 +68,9 @@ void FragTrap::attack(const std::string& target){
 }
 
 void FragTrap::highFivesGuys(void){
-	std::cout 
-	<< Name
-	<< " gave a high five"
-	<< std::endl;
-}
-
-
-void FragTrap::takeDamage(unsigned int amount){
-	if (HitPoints < amount)
-		HitPoints = 0;
-	else
-		HitPoints -= amount;
-	std::string s = typeid(*this).name();
-	std::cout 
-	<< s.substr(1, s.size()-1)
-	<< " "
-	<< Name
-	<< " takes "
-	<< amount
-	<< " points of damage!"
-	<< std::endl;
-}
-
-void FragTrap::beRepaired(unsigned int amount){
-	std::string s = typeid(*this).name();
 	if (EnergyPoints == 0){
-		std::cout 
-		<< s.substr(1, s.size()-1)
-		<< " "
-		<< Name
-		<< " ran out of energy points" << std::endl;
+		myPutStr(Name, " Zero energy points. A high touch of the soul.", PINK198);
 		return;
 	}
-	EnergyPoints -= 1;
-	if (HitPoints + amount >= this->Max_HP)
-		HitPoints = Max_HP;
-	else {
-		HitPoints += amount;
-	}
-	std::cout 
-	<< s.substr(1, s.size()-1)
-	<< " "
-	<< Name
-	<< " regained "
-	<< amount
-	<< " hit points!"
-	<< std::endl;
+	myPutStr(Name, " gave a high five", PINK198);
 }

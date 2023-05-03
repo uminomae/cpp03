@@ -12,6 +12,10 @@ int main(){
 }
 
 
+void myPutStr(std::string s1, std::string s2, std::string color){
+	std::cout << color << s1 << s2 << RESET_COLOR << std::endl;
+}
+
 void myTest(){
 
 	myPutStr("=========", "===========", PINK201);
@@ -30,8 +34,8 @@ void myTest(){
 	ClapTrap c;
 	myPutStr("=== c = b;", "", PINK170);
 	c = b;
-	myPutStr("=== ClapTrap d(\"pre-cure\");", "", PINK170);
-	ClapTrap d("pre-cure");
+	myPutStr("=== ClapTrap d(\"PreCure\");", "", PINK170);
+	ClapTrap d("PreCure");
 
 	myPutStr("=========", "===========", PINK198);
 	myPutStr("TEST  ", " member variable", PINK198);
@@ -49,16 +53,16 @@ void myTest(){
 	myPutStr("TEST  ", " member functions ", PINK198);
 	myPutStr("=========", "===========", PINK198);
 
-	myPutStr("=== ", "d.attack(\"yada-yada-\")", PINK170);
-	d.attack("yada-yada-");
+	myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
+	d.attack("YadaYada-");
 	d.DebugHp(PINK183);
 	
 	myPutStr("=== ", "d.takeDamage(3)", PINK170);
 	d.takeDamage(3);
 	d.DebugHp(PINK183);
 	
-	myPutStr("=== ", "d.beRepaired(2)", PINK170);
-	d.beRepaired(2);
+	myPutStr("=== ", "d.beRepaired(4)", PINK170);
+	d.beRepaired(4);
 	d.DebugHp(PINK183);
 	
 
@@ -67,8 +71,8 @@ void myTest(){
 	myPutStr("=========", "===========", PINK198);
 	
 	while (d.getEnergyPoints() > 0){
-		myPutStr("=== ", "d.attack(\"yada-yada-\")", PINK170);
-		d.attack("yada-yada-");
+		myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
+		d.attack("YadaYada-");
 		d.DebugEP(PINK183);
 		
 		myPutStr("=== ", "d.beRepaired(2)", PINK170);
@@ -76,13 +80,36 @@ void myTest(){
 		d.DebugEP(PINK183);
 	}
 
-	myPutStr("", "--end--scope", PINK170);
-}
+	myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
+	d.attack("YadaYada-");
+	d.DebugEP(PINK183);
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+
+	while (d.getHitPoints() > 0){
+		myPutStr("=== ", "d.takeDamage(3)", PINK170);
+		d.takeDamage(3);
+		d.DebugHp(PINK183);
+	}
 
 
-void myPutStr(std::string s1, std::string s2, std::string color){
-	std::cout << color << s1 << s2 << RESET_COLOR << std::endl;
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "No HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+	
+	myPutStr("=== no hit points ", "d.takeDamage(1)", PINK170);
+	d.takeDamage(1);
+	d.DebugHp(PINK183);
+
+	myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
+	d.attack("YadaYada-");
+	d.DebugEP(PINK183);
+
+	myPutStr("=== end of scope", "", PINK170);
 }
+
 
 // First, you have to implement a class! How original!
 // It will be called ClapTrap and will have the following private attributes initialized to the values specified in brackets:

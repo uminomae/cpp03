@@ -24,6 +24,10 @@ int main(){
 	return 0;
 }
 
+void myPutStr(std::string s1, std::string s2, std::string color){
+	std::cout << color << s1 << s2 << RESET_COLOR << std::endl;
+}
+
 void myTest1Clap(){
 
 	myPutStr("=========", "===========", PINK201);
@@ -88,7 +92,34 @@ void myTest1Clap(){
 		d.DebugEP(PINK183);
 	}
 
-	myPutStr("", "--end--scope", PINK170);
+	myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
+	d.attack("YadaYada-");
+	d.DebugEP(PINK183);
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+
+	while (d.getHitPoints() > 0){
+		myPutStr("=== ", "d.takeDamage(3)", PINK170);
+		d.takeDamage(3);
+		d.DebugHp(PINK183);
+	}
+
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "No HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+	
+	myPutStr("=== no hit points ", "d.takeDamage(1)", PINK170);
+	d.takeDamage(1);
+	d.DebugHp(PINK183);
+
+	myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
+	d.attack("YadaYada-");
+	d.DebugEP(PINK183);
+
+	myPutStr("", "=== end of scope", PINK170);
 }
 
 
@@ -111,8 +142,8 @@ void myTest2Scav(){
 		ScavTrap Sc;
 		myPutStr("=== Sc = Sb;", "", PINK136);
 		Sc = Sb;
-		myPutStr("=== ScavTrap d(\"PreCureBlack\");", "", PINK136);
-		ScavTrap Sd("PreCureBlack");
+		myPutStr("=== ScavTrap d(\"CureBlack\");", "", PINK136);
+		ScavTrap Sd("CureBlack");
 
 		myPutStr("=========", "===========", PINK190);
 		myPutStr("MY_TEST2_SCAV  ", " member variable", PINK190);
@@ -154,7 +185,7 @@ void myTest2Scav(){
 // #define DEB_LOOP50
 #ifdef DEB_LOOP50
 	{
-		ScavTrap Sd("PreCureBlack");
+		ScavTrap Sd("CureBlack");
 		myPutStr("=========", "===========", PINK190);
 		myPutStr("MY_TEST2_SCAV  ", "EnergyPoints ", PINK190);
 		myPutStr("=========", "===========", PINK190);
@@ -171,8 +202,7 @@ void myTest2Scav(){
 	}
 #endif
 
-
-		myPutStr("", "--end--scope", PINK136);
+		myPutStr("", "=== end of scope", PINK136);
 	}
 }
 
@@ -199,8 +229,8 @@ void myTest3Frag(){
 		Fc = Fb;
 		myPutStr("=== Fb = Fc;", "", PINK136);
 		Fb = Fc;
-		myPutStr("=== FragTrap d(\"PreCureWhite\");", "", PINK136);
-		FragTrap Fd("PreCureWhite");
+		myPutStr("=== FragTrap d(\"CureWhite\");", "", PINK136);
+		FragTrap Fd("CureWhite");
 
 		myPutStr("=========", "===========", PINK201);
 		myPutStr("MY_TEST3_FRAG  ", " member variable", PINK201);
@@ -239,10 +269,10 @@ void myTest3Frag(){
 		
 
 
-// #define DEB_LOOP100
+#define DEB_LOOP100
 #ifdef DEB_LOOP100
 	{
-		FragTrap Fd("PreCureWhite");
+		FragTrap Fd("CureWhite");
 		myPutStr("=========", "===========", PINK201);
 		myPutStr("MY_TEST3_FRAG  ", "EnergyPoints ", PINK201);
 		myPutStr("=========", "===========", PINK201);
@@ -260,13 +290,33 @@ void myTest3Frag(){
 #endif
 
 
-		myPutStr("", "--end--scope", PINK183);
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+
+	while (Fd.getHitPoints() > 0){
+		myPutStr("=== ", "Fd.takeDamage(48)", PINK170);
+		Fd.takeDamage(48);
+		Fd.DebugHp(PINK183);
+	}
+
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "No HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+	
+	myPutStr("=== no hit points ", "Fd.takeDamage(1)", PINK170);
+	Fd.takeDamage(1);
+	Fd.DebugHp(PINK183);
+
+	myPutStr("=== ", "Fd.attack(\"YadaYada-\")", PINK170);
+	Fd.attack("YadaYada-");
+	Fd.DebugEP(PINK183);
+
+	myPutStr("", "=== end of scope", PINK183);
 	}
 }
 
-void myPutStr(std::string s1, std::string s2, std::string color){
-	std::cout << color << s1 << s2 << RESET_COLOR << std::endl;
-}
 
 
 // Making ClapTraps is probably starting to get on your nerves.

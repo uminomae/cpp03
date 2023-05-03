@@ -25,7 +25,8 @@ public:
 	void beRepaired(unsigned int amount);
 
 	int getEnergyPoints();
-
+	int getHitPoints();
+	std::string myGetClassName();
 	void DebugHp(std::string color);
 	void DebugEP(std::string color);
 };

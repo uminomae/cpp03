@@ -18,6 +18,10 @@ int main(){
 	return 0;
 }
 
+void myPutStr(std::string s1, std::string s2, std::string color){
+	std::cout << color << s1 << s2 << RESET_COLOR << std::endl;
+}
+
 void myTest1Clap(){
 
 	myPutStr("=========", "===========", PINK201);
@@ -82,7 +86,34 @@ void myTest1Clap(){
 		d.DebugEP(PINK183);
 	}
 
-	myPutStr("", "--end--scope", PINK170);
+	myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
+	d.attack("YadaYada-");
+	d.DebugEP(PINK183);
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+
+	while (d.getHitPoints() > 0){
+		myPutStr("=== ", "d.takeDamage(3)", PINK170);
+		d.takeDamage(3);
+		d.DebugHp(PINK183);
+	}
+
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "No HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+	
+	myPutStr("=== no hit points ", "d.takeDamage(1)", PINK170);
+	d.takeDamage(1);
+	d.DebugHp(PINK183);
+
+	myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK170);
+	d.attack("YadaYada-");
+	d.DebugEP(PINK183);
+
+	myPutStr("", "=== end of scope", PINK170);
 }
 
 
@@ -105,8 +136,8 @@ void myTest2Scav(){
 		ScavTrap Sc;
 		myPutStr("=== Sc = Sb;", "", PINK136);
 		Sc = Sb;
-		myPutStr("=== ScavTrap d(\"PreCureAce\");", "", PINK136);
-		ScavTrap Sd("PreCureAce");
+		myPutStr("=== ScavTrap d(\"CureAce\");", "", PINK136);
+		ScavTrap Sd("CureAce");
 
 		myPutStr("=========", "===========", PINK190);
 		myPutStr("MY_TEST2_SCAV  ", " member variable", PINK190);
@@ -145,10 +176,10 @@ void myTest2Scav(){
 		
 
 
-// #define DEB_LOOP50
+#define DEB_LOOP50
 #ifdef DEB_LOOP50
 	{
-		ScavTrap Sd("PreCureAce");
+		ScavTrap Sd("CureAce");
 		myPutStr("=========", "===========", PINK190);
 		myPutStr("MY_TEST2_SCAV  ", "EnergyPoints ", PINK190);
 		myPutStr("=========", "===========", PINK190);
@@ -162,16 +193,38 @@ void myTest2Scav(){
 			Sd.beRepaired(2);
 			Sd.DebugEP(PINK180);
 		}
+		myPutStr("=== ", "d.attack(\"YadaYada-\")", PINK136);
+		Sd.attack("YadaYada-");
+		Sd.DebugEP(PINK183);
 	}
 #endif
 
 
-		myPutStr("", "--end--scope", PINK136);
-	}
-}
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
 
-void myPutStr(std::string s1, std::string s2, std::string color){
-	std::cout << color << s1 << s2 << RESET_COLOR << std::endl;
+	while (Sd.getHitPoints() > 0){
+		myPutStr("=== ", "Sd.takeDamage(24)", PINK170);
+		Sd.takeDamage(24);
+		Sd.DebugHp(PINK183);
+	}
+
+
+	myPutStr("=========", "===========", PINK198);
+	myPutStr("TEST  ", "No HitPoints ", PINK198);
+	myPutStr("=========", "===========", PINK198);
+	
+	myPutStr("=== no hit points ", "Sd.takeDamage(1)", PINK170);
+	Sd.takeDamage(1);
+	Sd.DebugHp(PINK183);
+
+	myPutStr("=== ", "Sd.attack(\"YadaYada-\")", PINK170);
+	Sd.attack("YadaYada-");
+	Sd.DebugEP(PINK183);
+
+	myPutStr("", "=== end of scope", PINK136);
+	}
 }
 
 

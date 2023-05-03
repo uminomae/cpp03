@@ -2,62 +2,75 @@
 
 ClapTrap::ClapTrap()
 :Name("Clap"),HitPoints(10),EnergyPoints(10),AttackDamaged(0),Max_HP(10){
-	myPutStr("", "Base class Clap : Default constructor called", PINK183);
+	myPutStr(myGetClassName(), " : Default constructor called", PINK183);
 }
 
 ClapTrap::ClapTrap(const ClapTrap& obj){
-	myPutStr("", "Base class Clap : Copy constructor called", PINK183);
+	myPutStr(myGetClassName(), " : Copy constructor called", PINK183);
 	*this = obj;
 }
 
 ClapTrap& ClapTrap::operator =(const ClapTrap& rhs){
-	myPutStr("", "Base class Clap : Copy assignment operator called", PINK183);
-	Name = rhs.Name;
-	HitPoints = rhs.HitPoints;
-	EnergyPoints = rhs.EnergyPoints;
-	AttackDamaged = rhs.AttackDamaged;
+	myPutStr(myGetClassName(), " : Copy assignment operator called", PINK183);
+	if (this != &rhs){
+		Name = rhs.Name;
+		HitPoints = rhs.HitPoints;
+		EnergyPoints = rhs.EnergyPoints;
+		AttackDamaged = rhs.AttackDamaged;
+	}
 	return *this;
 }
 
 ClapTrap::~ClapTrap(){
-	myPutStr("", "Base class Clap : Destructor called", PINK183);
+	myPutStr(myGetClassName(), " :  Destructor called", PINK183);
 }
 
 ClapTrap::ClapTrap(std::string s)
 :Name(s),HitPoints(10),EnergyPoints(10),AttackDamaged(0),Max_HP(10){
-	myPutStr("", "Base class Clap : constructor with arguments called", PINK183);
+	myPutStr(myGetClassName(), " : Constructor with arguments called", PINK183);
 }
-
 
 
 void ClapTrap::attack(const std::string& target){
 	std::string s = typeid(*this).name();
-	if (EnergyPoints == 0){
+	if (HitPoints == 0){
+		myPutStr(Name, "  no hit points. looks like a corpse.", PINK198);
+		return ;
+	}else if (EnergyPoints == 0){
 		std::cout 
 		<< s.substr(1, s.size()-1)
 		<< " "
 		<< Name
 		<< " ran out of energy points" << std::endl;
 		return;
+	}else{
+		EnergyPoints -= 1;
+		std::cout 
+		<< s.substr(1, s.size()-1)
+		<< " "
+		<< Name
+		<< " attacks "
+		<< target
+		<< ", causing "
+		<< AttackDamaged
+		<< " points of damage!"
+		<< std::endl;
 	}
-	EnergyPoints -= 1;
-	std::cout 
-	<< s.substr(1, s.size()-1)
-	<< " "
-	<< Name
-	<< " attacks "
-	<< target
-	<< ", causing "
-	<< AttackDamaged
-	<< " points of damage!"
-	<< std::endl;
+	return ;
 }
 
 void ClapTrap::takeDamage(unsigned int amount){
-	if (HitPoints < amount)
+	if (HitPoints == 0){
+		myPutStr(Name, "  no hit points. looks like a corpse.", PINK198);
+		return ;
+	}
+
+	if (HitPoints < amount){
 		HitPoints = 0;
-	else
+	}else{
 		HitPoints -= amount;
+	}
+	
 	std::string s = typeid(*this).name();
 	std::cout 
 	<< s.substr(1, s.size()-1)
@@ -79,12 +92,15 @@ void ClapTrap::beRepaired(unsigned int amount){
 		<< " ran out of energy points" << std::endl;
 		return;
 	}
+
 	EnergyPoints -= 1;
-	if (HitPoints + amount >= this->Max_HP)
+	
+	if (HitPoints + amount >= Max_HP)
 		HitPoints = Max_HP;
 	else {
 		HitPoints += amount;
 	}
+
 	std::cout 
 	<< s.substr(1, s.size()-1)
 	<< " "
@@ -100,6 +116,17 @@ int ClapTrap::getEnergyPoints(){
 	return EnergyPoints;
 }
 
+int ClapTrap::getHitPoints(){
+	return HitPoints;
+}
+
+std::string ClapTrap::myGetClassName(){
+	std::string ret = typeid(*this).name();
+	ret = ret.substr(1, ret.size()-1);
+	return ret;
+}
+
+
 void ClapTrap::DebugHp(std::string color){
 	std::cout << color 
 	<< "Name\t\t: " << Name << "\n"
@@ -107,7 +134,7 @@ void ClapTrap::DebugHp(std::string color){
 	<< "HitPoints\t: " << HitPoints << "\n"
 	<< color 
 	<< "EnergyPoints\t: " << EnergyPoints << "\n"
-	<< "AttackDamaged\t: " << AttackDamaged 
+	// << "AttackDamaged\t: " << AttackDamaged 
 	<< RESET_COLOR << std::endl;
 }
 
@@ -118,6 +145,6 @@ void ClapTrap::DebugEP(std::string color){
 	<< PINK198
 	<< "EnergyPoints\t: " << EnergyPoints << "\n"
 	<< color 
-	<< "AttackDamaged\t: " << AttackDamaged 
+	// << "AttackDamaged\t: " << AttackDamaged 
 	<< RESET_COLOR << std::endl;
 }
