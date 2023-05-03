@@ -269,7 +269,7 @@ void myTest3Frag(){
 		
 
 
-#define DEB_LOOP100
+// #define DEB_LOOP100
 #ifdef DEB_LOOP100
 	{
 		FragTrap Fd("CureWhite");

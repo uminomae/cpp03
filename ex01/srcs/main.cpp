@@ -176,7 +176,7 @@ void myTest2Scav(){
 		
 
 
-#define DEB_LOOP50
+// #define DEB_LOOP50
 #ifdef DEB_LOOP50
 	{
 		ScavTrap Sd("CureAce");
